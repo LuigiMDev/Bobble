@@ -59,6 +59,25 @@
   width: 10rem;
 }
 
+.Search__Form {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.Search__Icon {
+  position: absolute;
+  right: 1rem;
+  opacity: 0.5;
+  width: 2rem;
+  transition: all .2s ease-in-out;
+  cursor: pointer;
+}
+
+.Search__Icon:hover {
+  opacity: 0.8;
+}
+
 .Input {
   width: 90%;
 }
@@ -74,3 +93,8 @@
   color: #1d1c1c;
   padding: 1rem;
 }
+
+ul {
+  padding: 0;
+}
+

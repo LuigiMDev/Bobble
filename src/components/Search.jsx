@@ -7,30 +7,22 @@ const Search = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const API_KEY =
-    "8b629976f774f1a3d700699d3d74daf640d31c77a6b7fa07a5b3b1199e29e304";
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!query) {
       return;
     }
-
+    setError("");
+    setLoading(true);
     try {
-      setLoading(true);
-      const res = axios.get("https://serpapi.com/search.json", {
-        params: {
-          q: query,
-          engine: "google",
-          google_domain: "google.com.br",
-          api_key: API_KEY,
-          hl: "pt-br",
-          gl: "br",
-          num: 10,
-        },
-      });
-      const data = await res.json();
+      const URL = 'http://localhost:4000/search'
+      const res = await axios.get(URL, {
+        params:{
+          query: query,
+        }
+      })
+      const data = res.data.organic_results || [];
       setResults(data);
     } catch (err) {
       console.error(err);
@@ -63,24 +55,24 @@ const Search = () => {
         </form>
       </div>
       <div>
-        <ul>
-          {error ? (
-            <h4>{error}</h4>
-          ) : loading ? (
-            <h4>Carregando...</h4>
-          ) : (
-            results.map((r, index) => {
+        {error ? (
+          <h4>{error}</h4>
+        ) : loading ? (
+          <h4>Carregando...</h4>
+        ) : (
+          <ul>
+            {results.map((r, index) => {
               return (
-                <li key={index}>
-                  <a href={r.link} target="_blank" rel="noopener noreferrer">
+                <li className="ul__link" key={index}>
+                  <a className="a__link" href={r.link} target="_blank" rel="noopener noreferrer">
                     {r.title}
                   </a>
                   <p>{r.snippet}</p>
                 </li>
               );
-            })
-          )}
-        </ul>
+            })}
+          </ul>
+        )}
       </div>
     </div>
   );

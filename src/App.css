@@ -96,5 +96,16 @@
 
 ul {
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  text-align: justify;
+}
+
+.ul__link {
+  list-style: none;
+}
+
+.a__link {
+  color: #99c3ff;
 }
 
